@@ -401,6 +401,16 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.setHighlightSelectedWord(highlightSelectedWord);
 	}-*/;
+	
+	/**
+	 * Set or unset highlighting of of the active line
+	 *
+	 * @param highlightActiveLine true to highlight active line
+	 */
+	public native void setHighlightActiveLine(boolean highlightActiveLine) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.setHighlightActiveLine(highlightActiveLine);
+	}-*/;
 
 	/**
 	 * Set or unset the visibility of the print margin.
@@ -410,6 +420,26 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	public native void setShowPrintMargin(boolean showPrintMargin) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		editor.renderer.setShowPrintMargin(showPrintMargin);
+	}-*/;
+	
+	/**
+	 * Set whether to display invisible characters
+	 *
+	 * @param showInvisibles true to display invisible Characters (tabs, spaces etc)
+	 */
+	public native void setShowInvisibles(boolean showInvisibles) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.setShowInvisibles(showInvisibles);
+	}-*/;
+	
+	/**
+	 * Set whether to display indent guides
+	 *
+	 * @param displayIndentGuides true to display indent guides
+	 */
+	public native void setDisplayIndentGuides(boolean displayIndentGuides) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.setDisplayIndentGuides(displayIndentGuides);
 	}-*/;
 
 	/**

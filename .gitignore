@@ -1,2 +1,4 @@
 /AceGWT/war/WEB-INF/classes
+.gitignore
 *.swp
+/bin/

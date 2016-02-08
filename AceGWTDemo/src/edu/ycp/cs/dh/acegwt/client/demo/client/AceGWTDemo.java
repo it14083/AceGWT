@@ -104,6 +104,9 @@ public class AceGWTDemo implements EntryPoint {
 		editor1.startEditor(); // must be called before calling setTheme/setMode/etc.
 		editor1.setTheme(AceEditorTheme.ECLIPSE);
 		editor1.setMode(AceEditorMode.JAVA);
+		editor1.setHighlightActiveLine(false);
+		editor1.setShowInvisibles(true);
+		editor1.setDisplayIndentGuides(true);
 		
 		// use cursor position change events to keep a label updated
 		// with the current row/col
