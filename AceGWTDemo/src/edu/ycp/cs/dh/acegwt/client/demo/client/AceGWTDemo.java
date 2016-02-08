@@ -205,6 +205,26 @@ public class AceGWTDemo implements EntryPoint {
 		});
 		buttonPanel.add(insertTextButton);
 		
+		// Add button to execute editor.undo()
+		Button undoButton = new Button("Undo");
+		undoButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.undo();
+			}
+		});
+		buttonPanel.add(undoButton);
+		
+		// Add button to execute editor.redo()
+		Button redoButton = new Button("Redo");
+		redoButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				editor1.redo();
+			}
+		});
+		buttonPanel.add(redoButton);
+		
 		// Add check box to enable/disable soft tabs
 		final CheckBox softTabsBox = new CheckBox("Soft tabs");
 		softTabsBox.setValue(true); // I think soft tabs is the default

@@ -197,6 +197,13 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 			callback.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
 		});
 	}-*/;
+	
+	public native void addOnInputHandler(AceEditorCallback callback) /*-{
+	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+	    editor.on("input", function(e) {
+	      callback.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
+	    });
+	}-*/;
 
 	/**
 	 * Give font size
@@ -791,4 +798,38 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		
 		return new AceCompletionCallbackImpl(jsCallback);
 	}
+	
+	/**
+	 * Reverts the last change, if there is one known to the undomanager
+	 */
+	public native void undo()  /*-{
+	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+	    editor.undo();
+	}-*/;
+
+	/**
+	 * Reverts the last undo, if there is one known to the undomanager
+	 */
+	public native void redo()  /*-{
+	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+	    editor.redo();
+	}-*/;
+
+	/**
+	 * returns whether the undomanager knows changes he can undo
+	 * @return undo available
+	 */
+	public native boolean hasUndo()  /*-{
+	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+	    return editor.getSession().getUndoManager().hasUndo();
+	}-*/;
+
+	/**
+	 * returns whether the undomanager knows of undos he can redo
+	 * @return redo available
+	 */
+	public native boolean hasRedo()  /*-{
+	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+	    return editor.getSession().getUndoManager().hasRedo();
+	}-*/;
 }
