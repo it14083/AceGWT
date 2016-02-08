@@ -113,6 +113,14 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		editor.resize();
 		editor.focus();
 	}-*/;
+	
+	/**
+	 * Call this to resize the editor
+	 */
+	public native void resize() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.resize();
+	}-*/;
 
 	/**
 	 * Cleans up the entire editor.
