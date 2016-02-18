@@ -843,4 +843,22 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 	    return editor.getSession().getUndoManager().hasRedo();
 	}-*/;
+	
+	
+	/**
+	 * Tells the undomanager this state is clean
+	 */
+	public native boolean markClean()  /*-{
+	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+	    return editor.getSession().getUndoManager().markClean();
+	}-*/;
+	
+	/**
+	 * returns whether this state is clean
+	 * @return state clean
+	 */
+	public native boolean isClean()  /*-{
+	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+	    return editor.getSession().getUndoManager().isClean();
+	}-*/;
 }
