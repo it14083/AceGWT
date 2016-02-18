@@ -859,4 +859,102 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	    var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 	    return editor.getSession().getUndoManager().isClean();
 	}-*/;
+
+	
+	/**
+	 * cuts the selected content in the editor to the clipboard
+	 * only works in response to a user action (for example button press)
+	 * @return success
+	 */
+	public boolean cut() {
+		if(copy()) {
+			execCommand("cut");
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * copies the selected content in the editor to the clipboard
+	 * only works in response to a user action (for example button press)
+	 * @return success
+	 */
+	public native boolean copy() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var text = editor.session.getTextRange(editor.getSelectionRange());
+	    
+		var targetId = "_hiddenCopyText_";
+		var target = document.createElement("textarea");
+		target.style.position = "absolute";
+		target.style.left = "-9999px";
+		target.style.top = "0";
+		target.id = targetId;
+		document.body.appendChild(target);
+	
+		target.textContent = text;
+		
+		// select the content
+		target.focus();
+		target.setSelectionRange(0, target.value.length);
+		
+		// copy the selection
+		var succeed;
+		try {
+		    succeed = document.execCommand("copy");
+		} catch(e) {
+		    succeed = false;
+		}
+		
+		target.textContent = "";
+		
+		document.body.removeChild(target);
+		
+		return succeed;
+  	}-*/;
+
+	
+	/**
+	 * pastes the clipboard contents to the editor
+	 * only works in response to a user action (for example button press)
+	 * @return success
+	 */
+	public native boolean paste() /*-{ 
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		
+		var targetId = "_hiddenCopyText_";
+		var target = document.createElement("textarea");
+		target.style.position = "absolute";
+		target.style.left = "-9999px";
+		target.style.top = "0";
+		target.id = targetId;
+		document.body.appendChild(target);
+		
+		// select the content
+		target.textContent = "";
+		target.focus();
+		
+		// paste to textarea
+		var succeed;
+		try {
+		    succeed = document.execCommand("paste");
+		} catch(e) {
+		    succeed = false;
+		}
+		
+		editor.insert(target.textContent);
+		
+		document.body.removeChild(target);
+		
+		editor.focus();
+		
+		return succeed;
+	}-*/;
+
+	/**
+	 * asks the browser if this command is supported
+	 * @return supported
+	 */
+	public native boolean queryCommandSupported(String cmd)  /*-{
+		return document.queryCommandSupported(cmd);
+	}-*/;
 }
