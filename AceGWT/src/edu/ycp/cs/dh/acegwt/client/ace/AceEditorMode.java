@@ -66,6 +66,8 @@ public enum AceEditorMode {
 	CURLY("curly"),
 	/** Dart. */
 	DART("Dart"),
+	/** DCF. */
+	DCF("dcf"),
 	/** Diff. */
 	DIFF("diff"),
 	/** Django. */
