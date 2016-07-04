@@ -786,7 +786,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	
 	private void removeRegisteredMarker(int id) {
 		AceRange range = markers.remove(id);
-		range.detach();
+		if(range != null) {
+		  range.detach();
+		}
 	}
 	
 	/**
