@@ -39,6 +39,8 @@ import java.util.Map;
  *
  * @see <a href="http://ace.ajax.org/">Ajax.org Code Editor</a>
  */
+
+
 public class AceEditor extends Composite implements RequiresResize, HasText, TakesValue<String> {
 	// Used to generate unique element ids for Ace widgets.
 	private static int nextId = 0;
@@ -288,6 +290,21 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	public native String getLine(int row) /*-{
 		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
 		return editor.getSession().getDocument().getLine(row);
+	}-*/;
+	
+	/**
+	 * Get a list of {@link AceToken} for this row.
+	 * 
+	 * @param row the row number
+	 * @return list of {@link AceToken}
+	 */
+	public native List<AceToken> getTokens(int row) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var data = editor.getSession().getTokens(row);
+		var ret = @java.util.ArrayList::new()();
+		for (var i = 0; i < data.length; i++)
+			ret.@java.util.ArrayList::add(Ljava/lang/Object;)(@edu.ycp.cs.dh.acegwt.client.ace.AceToken::fromJavaScript(Lcom/google/gwt/core/client/JavaScriptObject;)(data[i]));
+		return ret;
 	}-*/;
 
 	/**
@@ -957,4 +974,5 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	public native boolean queryCommandSupported(String cmd)  /*-{
 		return document.queryCommandSupported(cmd);
 	}-*/;
+	
 }
