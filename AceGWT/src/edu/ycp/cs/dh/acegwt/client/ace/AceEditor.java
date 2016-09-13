@@ -382,6 +382,58 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 			jsPosition.column
 		);
 	}-*/;
+	
+	/**
+	 * Returns the offset in pixels from the top-left corner of the editor
+	 * to the bottom-left corner of the character at the specified position.
+	 * @param position JavaScriptObject with row and column
+	 * @return {@link AceEditorCursorPosition} with the offsets as x,y
+	 */
+	public native AceEditorCursorPosition getCoordinates(JavaScriptObject position) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var coord = editor.renderer.$cursorLayer.getPixelPosition(position, true);
+		coord.left = coord.left + editor.renderer.gutterWidth - editor.getSession().getScrollLeft();
+		coord.top = coord.top + editor.renderer.lineHeight;
+	
+		var row = editor.getSession().getScrollTop() / editor.renderer.lineHeight;
+		var startpos = editor.getSession().screenToDocumentPosition(row, 0);
+		var newpos = editor.getSession().screenToDocumentPosition(row, 0);
+		var i = 0;
+		while(newpos.row == startpos.row && row - i >= 0) {
+			i++;
+			newpos = editor.getSession().screenToDocumentPosition(row - i, 0);
+		}
+	
+		var fullyCoveredLines = (i-1) * editor.renderer.lineHeight;
+		var partiallyCoveredLine = editor.getSession().getScrollTop() % editor.renderer.lineHeight;
+		coord.top -= fullyCoveredLines + partiallyCoveredLine;
+	
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::getCursorPositionImpl(DD)(coord.top, coord.left);
+	}-*/;
+
+	/**
+	 * Returns the line height from Ace in pixels.
+	 * @return the line height
+	 */
+	public native int getLineHeight() /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		return editor.renderer.lineHeight;
+	}-*/;
+
+	/**
+	 * Returns the document position for the given coordinates.
+	 * The coordinates are relative to the top-left-corner of the editor.
+	 * @param x horizontal offset
+	 * @param y vertical offset
+	 * @return the document position for these coordinates
+	 */
+	public native AceEditorCursorPosition getPositionFromCoordinates(int x, int y) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var row = (y + editor.getSession().getScrollTop()) / editor.renderer.lineHeight;
+		var column = (x + editor.getSession().getScrollLeft() - editor.renderer.gutterWidth) / editor.renderer.characterWidth;
+		var pos = editor.getSession().screenToDocumentPosition(row, column);
+		return this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::getCursorPositionImpl(DD)(pos.row, pos.column);
+	}-*/;
 
 	/**
 	 * Set whether or not soft tabs should be used.
