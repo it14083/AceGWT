@@ -790,6 +790,20 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 	
 	/**
+	 * Creates an Anchor at the specified row and column.
+	 * The Anchor updates its position on inserts/deletes.
+	 * @param row the row
+	 * @param column the column
+	 * @return {@link AceAnchor}
+	 */
+	public native AceAnchor createAnchor(int row, int column) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var doc = editor.getSession().getDocument();
+		var anchor = doc.createAnchor(row, column);
+		return @edu.ycp.cs.dh.acegwt.client.ace.AceAnchor::new(Lcom/google/gwt/core/client/JavaScriptObject;)(anchor);
+	}-*/;
+	
+	/**
 	 * Prepare a wrapper around Ace Selection object.
 	 * @return a wrapper around Ace Selection object
 	 */
