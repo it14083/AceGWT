@@ -282,6 +282,27 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}-*/;
 	
 	/**
+	 * Removes text in row from startColumn to endColumn.
+	 * @param row the row
+	 * @param startColumn the start column
+	 * @param endColumn the end column
+	 */
+	public native void removeInLine(int row, int startColumn, int endColumn) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().getDocument().removeInLine(row, startColumn, endColumn);
+	}-*/;
+
+	/**
+	 * Inserts text at the given position.
+	 * @param pos JavaScriptObject with .row and .pos
+	 * @param text the text
+	 */
+	public native void insertInLine(JavaScriptObject pos, String text) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().getDocument().insertInLine(pos, text);
+	}-*/;
+	
+	/**
 	 * Get the line of text at the given row number.
 	 * 
 	 * @param row the row number
