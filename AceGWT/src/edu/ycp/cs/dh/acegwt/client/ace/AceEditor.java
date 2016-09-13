@@ -215,6 +215,41 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	      callback.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
 	    });
 	}-*/;
+	
+	/**
+	 * Adds a callback in the session of Ace for the specified event.
+	 * @param event the name of the event
+	 * @param callback the callback that gets called
+	 * @return a reference to the callback
+	 */
+	public native JavaScriptObject addSessionEventHandler(String event, AceEditorCallback callback) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		var clb = function(e) {
+			callback.@edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback::invokeAceCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(e);
+		};
+		editor.getSession().on(event, clb);
+		return clb;
+	}-*/;
+	
+	/**
+	 * Adds a callback in the session of Ace for the specified event.
+	 * @param event the name of the event
+	 * @param callback reference to the callback as returned by {@link #addSessionEventHandler(String, AceEditorCallback)}.
+	 */
+	public native void addSessionEventHandler(String event, JavaScriptObject callback) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().on(event, callback);
+	}-*/;
+	
+	/**
+	 * Removes the callback in the session of Ace for the specified event.
+	 * @param event the name of the event
+	 * @param callback the reference to the callback as returned by {@link #addSessionEventHandler(String, AceEditorCallback)}.
+	 */
+	public native void removeSessionEventHandler(String event, JavaScriptObject callback) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getSession().off(event, callback);
+	}-*/;
 
 	/**
 	 * Give font size
