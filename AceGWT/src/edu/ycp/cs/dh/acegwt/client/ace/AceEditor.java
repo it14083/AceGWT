@@ -1099,4 +1099,14 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 		return document.queryCommandSupported(cmd);
 	}-*/;
 	
+	/**
+	 * Add shortcuts to Ace. To delete bind to null.
+	 * @param keystroke the String representation of the keystroke
+	 * @param command the command to execute
+	 */
+	public native void bindKey(String keystroke, String command) /*-{
+		var editor = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::editor;
+		editor.getKeyboardHandler().bindKey(keystroke, command);
+	}-*/;
+	
 }
