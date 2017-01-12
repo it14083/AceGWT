@@ -5,24 +5,9 @@ var oop = require("../lib/oop");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
 var DCFHighlightRules = function() {
-var keywords = "ACCEPT|MERGE";
-
-    var builtinConstants = (
-        "true|false|null"
-    );
-
-    var builtinFunctions = (
-        "count|min|max|avg|sum|rank|now|coalesce|main"
-    );
-
-    var keywordMapper = this.createKeywordMapper({
-        "support.function": builtinFunctions,
-        "keyword": keywords,
-        "constant.language": builtinConstants
-    }, "identifier", true);
 
     this.$rules = {
-    		"start": [
+            "start": [
                     {
                         token: "comment",
                         regex: "\\.\\*.*$"
@@ -40,17 +25,8 @@ var keywords = "ACCEPT|MERGE";
                         regex: "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?(mm|cm|in)?\\b"
                     },
                     {
-                        token: keywordMapper,
-                        regex: "[a-zA-Z_$][a-zA-Z0-9_$]*\\b"
-                    },
-                    {
-                    	token: "keyword",
-                    	regex: "^\\.[a-z]*\\s",
-                    	next: "makro"
-                    },
-                    {
-                    	token: "keyword",
-                    	regex: "^\\.[a-z]*$",
+                        token: "keyword",
+                        regex: "^\\.[a-z]*\\b"
                     },
                     {
                         token: "keyword.operator",
@@ -74,32 +50,37 @@ var keywords = "ACCEPT|MERGE";
                         regex: "\\s+"
                     }
                 ],
-                "feld": [
-                         {
-                      	   token: "support.function",
-                      	   regex: "\\.",
-                      	   next: "start"
-                         },
-                         {
-                      	   token: "string",
-                      	   regex: "\'.*?\'"
-                         },
-                         {
-                             token: "keyword.operator",
-                             regex: "\\+|\\-|\\/|\\/\\/|%|<@>|@>|<@|&|\\^|~|<|>|<=|=>|==|!=|<>|="
-                         },
-                         {
-                      	   token: "variable.language",
-                      	   regex: "[^=]*"
-                         }
-                      ],
-                      "makro": [
-                          {
-                          	token: "entity.name",
-                          	regex: "\.*?$",
-                          	next: "start"
-                          }
-                      ]
+            "feld": [
+                    {
+                        token: "support.function",
+                        regex: "\\.$",
+                        next: "start"
+                    },
+                    {
+                        token: "string",
+                        regex: '".*?"'
+                    },
+                    {
+                        token: "string",
+                        regex: '\'.*?\''
+                    },
+                    {
+                        token: "constant.numeric",
+                        regex: "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?(mm|cm|in)?\\b"
+                    },
+                    {
+                        token: "paren.lparen",
+                        regex: "[\\(]"
+                    },
+                    {
+                        token: "paren.rparen",
+                        regex: "[\\)]"
+                    },
+                    {
+                        token: "text",
+                        regex: "\\s+"
+                    }
+            ]
     };
 };
 
