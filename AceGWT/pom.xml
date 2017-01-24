@@ -10,6 +10,7 @@
     <url>https://github.com/icon-Systemhaus-GmbH/AceGWT</url>
     <connection>scm:git:git://github.com/icon-Systemhaus-GmbH/AceGWT.git</connection>
     <developerConnection>scm:git:git@github.com:icon-Systemhaus-GmbH/AceGWT.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
